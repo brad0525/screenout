@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScreenOut/AppDelegate.swift"
+            timestampString = "480696806.577803"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "AppDelegate"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ScreenOut.AppDelegate.__deallocating_deinit"
+                  moduleName = "ScreenOut"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bradleyamster/Documents/website%20files/screenout/3-25-2016/Screenout%20Current%20Xcode%207.2/ScreenOut/ScreenOut/AppDelegate.swift"
+                  timestampString = "480697164.123619"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ScreenOut.AppDelegate.init () -&gt; ScreenOut.AppDelegate"
+                  moduleName = "ScreenOut"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bradleyamster/Documents/website%20files/screenout/3-25-2016/Screenout%20Current%20Xcode%207.2/ScreenOut/ScreenOut/AppDelegate.swift"
+                  timestampString = "480697164.123726"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "main"
+                  moduleName = "ScreenOut"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bradleyamster/Documents/website%20files/screenout/3-25-2016/Screenout%20Current%20Xcode%207.2/ScreenOut/ScreenOut/AppDelegate.swift"
+                  timestampString = "480697164.123812"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScreenOut/DashboardViewController.swift"
+            timestampString = "480698951.737077"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
+            landmarkName = "trackSpeedWithAction(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ScreenOut.DashboardViewController.(trackSpeedWithAction (Swift.String) -&gt; ()).(closure #1)"
+                  moduleName = "ScreenOut"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bradleyamster/Documents/website%20files/screenout/3-25-2016/Screenout%20Current%20Xcode%207.2/ScreenOut/ScreenOut/DashboardViewController.swift"
+                  timestampString = "480698127.934228"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "266"
+                  endingLineNumber = "266"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ScreenOut.DashboardViewController.(trackSpeedWithAction (Swift.String) -&gt; ()).(closure #1).(closure #1)"
+                  moduleName = "ScreenOut"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bradleyamster/Documents/website%20files/screenout/3-25-2016/Screenout%20Current%20Xcode%207.2/ScreenOut/ScreenOut/DashboardViewController.swift"
+                  timestampString = "480698127.934544"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "267"
+                  endingLineNumber = "267"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
