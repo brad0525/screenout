@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AirshipKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,12 +15,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        let config = UAConfig.defaultConfig()
+        UAirship.takeOff(config)
+        UAirship.push().userPushNotificationsEnabled = true
+        UAirship.push()
         
         application.idleTimerDisabled = true
         application.cancelAllLocalNotifications()
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [UIUserNotificationType.Sound, UIUserNotificationType.Alert], categories: nil))
         
         return true
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+
+        let characterSet: NSCharacterSet = NSCharacterSet(charactersInString: "<>")
+        
+        let deviceTokenString: String = (deviceToken.description as NSString).stringByTrimmingCharactersInSet(characterSet).stringByReplacingOccurrencesOfString( " ", withString: "") as String
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        let queryString = "deviceId=\(Device().name)&token=\(deviceTokenString)"
+        let escapedString = queryString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
+        let urlString = "\(Network().url)/deviceInformation.php?" + escapedString!
+        let task = Network().session!.dataTaskWithURL(NSURL(string: urlString)!, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+            
+            if (error == nil) {
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                    // register successfully
+                    // todo
+                })
+            } else {
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                    // can not register
+                    // todo
+                })
+            }
+        })
+        task.resume()
     }
     
     func applicationWillResignActive(application: UIApplication) {

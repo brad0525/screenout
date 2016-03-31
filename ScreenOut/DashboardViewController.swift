@@ -171,6 +171,7 @@ class DashboardViewController: UIViewController {
     }
     
     func checkSpeedAndUpdateAdmin() {
+        print("running in background")
         // update admin
         if let latitude = UserLocation.sharedInstance.currentLocation2d?.latitude {
             latitudeLabel.text = "\(latitude)"

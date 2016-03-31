@@ -32,6 +32,13 @@ class UserLocation: NSObject, CLLocationManagerDelegate
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.distanceFilter = kCLDistanceFilterNone
+        if locationManager.respondsToSelector(Selector("setAllowsBackgroundLocationUpdates:")){
+            if #available(iOS 9.0, *) {
+                locationManager.allowsBackgroundLocationUpdates = true
+            } else {
+                // Fallback on earlier versions
+            }
+        }
     }
     
     // MARK: Public class methods

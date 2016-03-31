@@ -23,6 +23,13 @@
 		07E8728519D525DA00FDE23D /* ScreenOutKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E8728419D525DA00FDE23D /* ScreenOutKitTests.swift */; };
 		07F717A219D798A200F22E48 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F717A119D798A200F22E48 /* IntroViewController.swift */; };
 		07F717A519D7A7EE00F22E48 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F717A419D7A7EE00F22E48 /* UserLocation.swift */; };
+		209190921CAAFAF400FD33D8 /* Airship in Resources */ = {isa = PBXBuildFile; fileRef = 209190901CAAFAF400FD33D8 /* Airship */; };
+		209190931CAAFAF400FD33D8 /* AirshipKit in Resources */ = {isa = PBXBuildFile; fileRef = 209190911CAAFAF400FD33D8 /* AirshipKit */; };
+		2091909C1CAAFB8300FD33D8 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2091909B1CAAFB8300FD33D8 /* AirshipConfig.plist */; };
+		2091909D1CAAFCCF00FD33D8 /* AirshipKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209190991CAAFB2200FD33D8 /* AirshipKit.framework */; };
+		2091909E1CAAFE7700FD33D8 /* AirshipKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209190991CAAFB2200FD33D8 /* AirshipKit.framework */; };
+		2091909F1CAB015200FD33D8 /* AirshipKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209190991CAAFB2200FD33D8 /* AirshipKit.framework */; };
+		209190A01CAB015200FD33D8 /* AirshipKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 209190991CAAFB2200FD33D8 /* AirshipKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		841B0BE61A41DC48008274B6 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841B0BE51A41DC48008274B6 /* FeedbackViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +48,35 @@
 			remoteGlobalIDString = 07D9287419CD20F8002FF0A0;
 			remoteInfo = ScreenOut;
 		};
+		209190981CAAFB2200FD33D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 209190941CAAFB2200FD33D8 /* AirshipKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 494DD9571B0EB677009C134E;
+			remoteInfo = AirshipKit;
+		};
+		209190A11CAB015200FD33D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 209190941CAAFB2200FD33D8 /* AirshipKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 494DD9561B0EB677009C134E;
+			remoteInfo = AirshipKit;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		209190A31CAB015300FD33D8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				209190A01CAB015200FD33D8 /* AirshipKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0780ACF219CD230900AA65CC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -67,6 +102,10 @@
 		07E8728419D525DA00FDE23D /* ScreenOutKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenOutKitTests.swift; sourceTree = "<group>"; };
 		07F717A119D798A200F22E48 /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		07F717A419D7A7EE00F22E48 /* UserLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
+		209190901CAAFAF400FD33D8 /* Airship */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Airship; sourceTree = "<group>"; };
+		209190911CAAFAF400FD33D8 /* AirshipKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AirshipKit; sourceTree = "<group>"; };
+		209190941CAAFB2200FD33D8 /* AirshipKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AirshipKit.xcodeproj; path = AirshipKit/AirshipKit.xcodeproj; sourceTree = "<group>"; };
+		2091909B1CAAFB8300FD33D8 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AirshipConfig.plist; sourceTree = "<group>"; };
 		841B0BE51A41DC48008274B6 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -75,7 +114,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2091909D1CAAFCCF00FD33D8 /* AirshipKit.framework in Frameworks */,
 				0780ACF819CD230900AA65CC /* CoreLocation.framework in Frameworks */,
+				2091909F1CAB015200FD33D8 /* AirshipKit.framework in Frameworks */,
 				0780ACFA19CD230900AA65CC /* Foundation.framework in Frameworks */,
 				0780ACFB19CD230900AA65CC /* MapKit.framework in Frameworks */,
 				0780ACFC19CD230900AA65CC /* UIKit.framework in Frameworks */,
@@ -93,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2091909E1CAAFE7700FD33D8 /* AirshipKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +163,10 @@
 		07D9286C19CD20F8002FF0A0 = {
 			isa = PBXGroup;
 			children = (
+				2091909B1CAAFB8300FD33D8 /* AirshipConfig.plist */,
+				209190941CAAFB2200FD33D8 /* AirshipKit.xcodeproj */,
+				209190901CAAFAF400FD33D8 /* Airship */,
+				209190911CAAFAF400FD33D8 /* AirshipKit */,
 				07ACD28F1A54B31A00F14F46 /* compass.png */,
 				07D9287719CD20F8002FF0A0 /* ScreenOut */,
 				07E8728119D525DA00FDE23D /* ScreenOutKitTests */,
@@ -209,6 +255,14 @@
 			name = Location;
 			sourceTree = "<group>";
 		};
+		209190951CAAFB2200FD33D8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				209190991CAAFB2200FD33D8 /* AirshipKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -229,10 +283,12 @@
 				07D9287119CD20F8002FF0A0 /* Sources */,
 				07D9287219CD20F8002FF0A0 /* Frameworks */,
 				07D9287319CD20F8002FF0A0 /* Resources */,
+				209190A31CAB015300FD33D8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				209190A21CAB015200FD33D8 /* PBXTargetDependency */,
 			);
 			name = ScreenOut;
 			productName = ScreenOut;
@@ -338,6 +394,12 @@
 			mainGroup = 07D9286C19CD20F8002FF0A0;
 			productRefGroup = 07D9287619CD20F8002FF0A0 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 209190951CAAFB2200FD33D8 /* Products */;
+					ProjectRef = 209190941CAAFB2200FD33D8 /* AirshipKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				07D9287419CD20F8002FF0A0 /* ScreenOut */,
@@ -348,6 +410,16 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		209190991CAAFB2200FD33D8 /* AirshipKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AirshipKit.framework;
+			remoteRef = 209190981CAAFB2200FD33D8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		07D9287319CD20F8002FF0A0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -356,7 +428,10 @@
 				07D9288019CD20F8002FF0A0 /* Main.storyboard in Resources */,
 				078137F619D38FEA002C47DC /* non_active_screenout.png in Resources */,
 				078137F719D38FEA002C47DC /* active_screenout.png in Resources */,
+				2091909C1CAAFB8300FD33D8 /* AirshipConfig.plist in Resources */,
+				209190921CAAFAF400FD33D8 /* Airship in Resources */,
 				07ACD2901A54B31A00F14F46 /* compass.png in Resources */,
+				209190931CAAFAF400FD33D8 /* AirshipKit in Resources */,
 				07D9288219CD20F8002FF0A0 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,6 +508,11 @@
 			isa = PBXTargetDependency;
 			target = 07D9287419CD20F8002FF0A0 /* ScreenOut */;
 			targetProxy = 07E8727F19D525DA00FDE23D /* PBXContainerItemProxy */;
+		};
+		209190A21CAB015200FD33D8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AirshipKit;
+			targetProxy = 209190A11CAB015200FD33D8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -531,14 +611,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bradley Amster (D4WU7UED37)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bradley Amster (D4WU7UED37)";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = ScreenOut/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.datadesignsystems.ScreenOutDevelopmentGPS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8e690509-4bb6-42c5-af05-954f6aab0535";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -550,6 +631,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = ScreenOut/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -605,6 +687,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -631,6 +714,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = ScreenOutKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
