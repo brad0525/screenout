@@ -11,8 +11,6 @@
 		0780ACFA19CD230900AA65CC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0780ACF419CD230900AA65CC /* Foundation.framework */; };
 		0780ACFB19CD230900AA65CC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0780ACF519CD230900AA65CC /* MapKit.framework */; };
 		0780ACFC19CD230900AA65CC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0780ACF619CD230900AA65CC /* UIKit.framework */; };
-		078137F619D38FEA002C47DC /* non_active_screenout.png in Resources */ = {isa = PBXBuildFile; fileRef = 078137F419D38FEA002C47DC /* non_active_screenout.png */; };
-		078137F719D38FEA002C47DC /* active_screenout.png in Resources */ = {isa = PBXBuildFile; fileRef = 078137F519D38FEA002C47DC /* active_screenout.png */; };
 		07ACD2901A54B31A00F14F46 /* compass.png in Resources */ = {isa = PBXBuildFile; fileRef = 07ACD28F1A54B31A00F14F46 /* compass.png */; };
 		07D9287B19CD20F8002FF0A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9287A19CD20F8002FF0A0 /* AppDelegate.swift */; };
 		07D9287D19CD20F8002FF0A0 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9287C19CD20F8002FF0A0 /* DashboardViewController.swift */; };
@@ -23,6 +21,16 @@
 		07E8728519D525DA00FDE23D /* ScreenOutKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E8728419D525DA00FDE23D /* ScreenOutKitTests.swift */; };
 		07F717A219D798A200F22E48 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F717A119D798A200F22E48 /* IntroViewController.swift */; };
 		07F717A519D7A7EE00F22E48 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F717A419D7A7EE00F22E48 /* UserLocation.swift */; };
+		206F2AEC1CB2A15200C23F25 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F2AEB1CB2A15200C23F25 /* MessageViewController.swift */; };
+		206F2AEF1CB2A41F00C23F25 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F2AEE1CB2A41F00C23F25 /* MessageTableViewCell.swift */; };
+		206F2AF71CB2A89100C23F25 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 206F2AF21CB2A89100C23F25 /* Info.plist */; };
+		206F2AF81CB2A89100C23F25 /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 206F2AF41CB2A89100C23F25 /* MGSwipeButton.m */; };
+		206F2AF91CB2A89100C23F25 /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 206F2AF61CB2A89100C23F25 /* MGSwipeTableCell.m */; };
+		206F2AFC1CB2B77000C23F25 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206F2AFB1CB2B77000C23F25 /* SystemConfiguration.framework */; };
+		206F2B201CB2B7CF00C23F25 /* active_screenout.png in Resources */ = {isa = PBXBuildFile; fileRef = 206F2B1E1CB2B7CF00C23F25 /* active_screenout.png */; };
+		206F2B211CB2B7CF00C23F25 /* non_active_screenout.png in Resources */ = {isa = PBXBuildFile; fileRef = 206F2B1F1CB2B7CF00C23F25 /* non_active_screenout.png */; };
+		206F2B291CB2BC4300C23F25 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F2B281CB2BC4300C23F25 /* Constant.swift */; };
+		206F2B2D1CB3E9E300C23F25 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 206F2B2C1CB3E9E300C23F25 /* MBProgressHUD.m */; };
 		209190921CAAFAF400FD33D8 /* Airship in Resources */ = {isa = PBXBuildFile; fileRef = 209190901CAAFAF400FD33D8 /* Airship */; };
 		209190931CAAFAF400FD33D8 /* AirshipKit in Resources */ = {isa = PBXBuildFile; fileRef = 209190911CAAFAF400FD33D8 /* AirshipKit */; };
 		2091909C1CAAFB8300FD33D8 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2091909B1CAAFB8300FD33D8 /* AirshipConfig.plist */; };
@@ -83,8 +91,6 @@
 		0780ACF419CD230900AA65CC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0780ACF519CD230900AA65CC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		0780ACF619CD230900AA65CC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		078137F419D38FEA002C47DC /* non_active_screenout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = non_active_screenout.png; sourceTree = "<group>"; };
-		078137F519D38FEA002C47DC /* active_screenout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = active_screenout.png; sourceTree = "<group>"; };
 		07ACD28F1A54B31A00F14F46 /* compass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = compass.png; sourceTree = "<group>"; };
 		07D9287519CD20F8002FF0A0 /* ScreenOut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScreenOut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07D9287919CD20F8002FF0A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -102,6 +108,20 @@
 		07E8728419D525DA00FDE23D /* ScreenOutKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenOutKitTests.swift; sourceTree = "<group>"; };
 		07F717A119D798A200F22E48 /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		07F717A419D7A7EE00F22E48 /* UserLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
+		206F2AEB1CB2A15200C23F25 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		206F2AEE1CB2A41F00C23F25 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
+		206F2AF21CB2A89100C23F25 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		206F2AF31CB2A89100C23F25 /* MGSwipeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSwipeButton.h; sourceTree = "<group>"; };
+		206F2AF41CB2A89100C23F25 /* MGSwipeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeButton.m; sourceTree = "<group>"; };
+		206F2AF51CB2A89100C23F25 /* MGSwipeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSwipeTableCell.h; sourceTree = "<group>"; };
+		206F2AF61CB2A89100C23F25 /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeTableCell.m; sourceTree = "<group>"; };
+		206F2AFA1CB2A9C500C23F25 /* Screenout-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Screenout-Bridging-Header.h"; sourceTree = "<group>"; };
+		206F2AFB1CB2B77000C23F25 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		206F2B1E1CB2B7CF00C23F25 /* active_screenout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = active_screenout.png; sourceTree = "<group>"; };
+		206F2B1F1CB2B7CF00C23F25 /* non_active_screenout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = non_active_screenout.png; sourceTree = "<group>"; };
+		206F2B281CB2BC4300C23F25 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		206F2B2B1CB3E9E300C23F25 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		206F2B2C1CB3E9E300C23F25 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		209190901CAAFAF400FD33D8 /* Airship */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Airship; sourceTree = "<group>"; };
 		209190911CAAFAF400FD33D8 /* AirshipKit */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AirshipKit; sourceTree = "<group>"; };
 		209190941CAAFB2200FD33D8 /* AirshipKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AirshipKit.xcodeproj; path = AirshipKit/AirshipKit.xcodeproj; sourceTree = "<group>"; };
@@ -114,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				206F2AFC1CB2B77000C23F25 /* SystemConfiguration.framework in Frameworks */,
 				2091909D1CAAFCCF00FD33D8 /* AirshipKit.framework in Frameworks */,
 				0780ACF819CD230900AA65CC /* CoreLocation.framework in Frameworks */,
 				2091909F1CAB015200FD33D8 /* AirshipKit.framework in Frameworks */,
@@ -151,6 +172,7 @@
 		0780ACFD19CD231700AA65CC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				206F2AFB1CB2B77000C23F25 /* SystemConfiguration.framework */,
 				0780ACF219CD230900AA65CC /* CoreLocation.framework */,
 				0780ACF419CD230900AA65CC /* Foundation.framework */,
 				0780ACF519CD230900AA65CC /* MapKit.framework */,
@@ -190,17 +212,21 @@
 		07D9287719CD20F8002FF0A0 /* ScreenOut */ = {
 			isa = PBXGroup;
 			children = (
+				206F2B271CB2BC2000C23F25 /* Utility */,
+				206F2AF01CB2A89100C23F25 /* Library */,
+				206F2AED1CB2A40300C23F25 /* View */,
 				07F717A319D7A7BA00F22E48 /* Location */,
-				078137F419D38FEA002C47DC /* non_active_screenout.png */,
-				078137F519D38FEA002C47DC /* active_screenout.png */,
 				07D9287A19CD20F8002FF0A0 /* AppDelegate.swift */,
 				07F717A119D798A200F22E48 /* IntroViewController.swift */,
 				07D9287C19CD20F8002FF0A0 /* DashboardViewController.swift */,
 				841B0BE51A41DC48008274B6 /* FeedbackViewController.swift */,
 				07DDC8AC1A54A4FA008D5EA1 /* SpeedometerView.swift */,
+				206F2AEB1CB2A15200C23F25 /* MessageViewController.swift */,
 				07D9287E19CD20F8002FF0A0 /* Main.storyboard */,
 				07D9288119CD20F8002FF0A0 /* Images.xcassets */,
+				206F2B1D1CB2B7CF00C23F25 /* Resource */,
 				07D9287819CD20F8002FF0A0 /* Supporting Files */,
+				206F2AFA1CB2A9C500C23F25 /* Screenout-Bridging-Header.h */,
 			);
 			path = ScreenOut;
 			sourceTree = "<group>";
@@ -253,6 +279,61 @@
 				07F717A419D7A7EE00F22E48 /* UserLocation.swift */,
 			);
 			name = Location;
+			sourceTree = "<group>";
+		};
+		206F2AED1CB2A40300C23F25 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				206F2AEE1CB2A41F00C23F25 /* MessageTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		206F2AF01CB2A89100C23F25 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				206F2B2A1CB3E9E300C23F25 /* MBProgressHUD */,
+				206F2AF11CB2A89100C23F25 /* MGSwipeTableCell */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		206F2AF11CB2A89100C23F25 /* MGSwipeTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				206F2AF21CB2A89100C23F25 /* Info.plist */,
+				206F2AF31CB2A89100C23F25 /* MGSwipeButton.h */,
+				206F2AF41CB2A89100C23F25 /* MGSwipeButton.m */,
+				206F2AF51CB2A89100C23F25 /* MGSwipeTableCell.h */,
+				206F2AF61CB2A89100C23F25 /* MGSwipeTableCell.m */,
+			);
+			path = MGSwipeTableCell;
+			sourceTree = "<group>";
+		};
+		206F2B1D1CB2B7CF00C23F25 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				206F2B1E1CB2B7CF00C23F25 /* active_screenout.png */,
+				206F2B1F1CB2B7CF00C23F25 /* non_active_screenout.png */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		206F2B271CB2BC2000C23F25 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				206F2B281CB2BC4300C23F25 /* Constant.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		206F2B2A1CB3E9E300C23F25 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				206F2B2B1CB3E9E300C23F25 /* MBProgressHUD.h */,
+				206F2B2C1CB3E9E300C23F25 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		209190951CAAFB2200FD33D8 /* Products */ = {
@@ -362,7 +443,7 @@
 				TargetAttributes = {
 					07D9287419CD20F8002FF0A0 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = 44F59823Z6;
+						DevelopmentTeam = KJ2QX8VTUE;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -426,11 +507,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				07D9288019CD20F8002FF0A0 /* Main.storyboard in Resources */,
-				078137F619D38FEA002C47DC /* non_active_screenout.png in Resources */,
-				078137F719D38FEA002C47DC /* active_screenout.png in Resources */,
+				206F2AF71CB2A89100C23F25 /* Info.plist in Resources */,
 				2091909C1CAAFB8300FD33D8 /* AirshipConfig.plist in Resources */,
 				209190921CAAFAF400FD33D8 /* Airship in Resources */,
+				206F2B211CB2B7CF00C23F25 /* non_active_screenout.png in Resources */,
 				07ACD2901A54B31A00F14F46 /* compass.png in Resources */,
+				206F2B201CB2B7CF00C23F25 /* active_screenout.png in Resources */,
 				209190931CAAFAF400FD33D8 /* AirshipKit in Resources */,
 				07D9288219CD20F8002FF0A0 /* Images.xcassets in Resources */,
 			);
@@ -467,9 +549,15 @@
 				07D9287D19CD20F8002FF0A0 /* DashboardViewController.swift in Sources */,
 				07D9287B19CD20F8002FF0A0 /* AppDelegate.swift in Sources */,
 				07DDC8AD1A54A4FA008D5EA1 /* SpeedometerView.swift in Sources */,
+				206F2AF81CB2A89100C23F25 /* MGSwipeButton.m in Sources */,
 				07F717A219D798A200F22E48 /* IntroViewController.swift in Sources */,
 				841B0BE61A41DC48008274B6 /* FeedbackViewController.swift in Sources */,
+				206F2AEF1CB2A41F00C23F25 /* MessageTableViewCell.swift in Sources */,
+				206F2B2D1CB3E9E300C23F25 /* MBProgressHUD.m in Sources */,
 				07F717A519D7A7EE00F22E48 /* UserLocation.swift in Sources */,
+				206F2AEC1CB2A15200C23F25 /* MessageViewController.swift in Sources */,
+				206F2AF91CB2A89100C23F25 /* MGSwipeTableCell.m in Sources */,
+				206F2B291CB2BC4300C23F25 /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -619,7 +707,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.datadesignsystems.ScreenOutDevelopmentGPS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8e690509-4bb6-42c5-af05-954f6aab0535";
+				PROVISIONING_PROFILE = "161c2945-1d0d-4fb5-89be-b2d689415a10";
+				SWIFT_OBJC_BRIDGING_HEADER = "ScreenOut/Screenout-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -638,6 +727,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.datadesignsystems.ScreenOutDevelopmentGPS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "ScreenOut/Screenout-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -33,6 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let deviceTokenString: String = (deviceToken.description as NSString).stringByTrimmingCharactersInSet(characterSet).stringByReplacingOccurrencesOfString( " ", withString: "") as String
         
+        // save device token
+        NSUserDefaults.standardUserDefaults().setObject(deviceTokenString, forKey: UserDefaultKey.kDeviceToken)
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let queryString = "deviceId=\(Device().name)&token=\(deviceTokenString)"
         let escapedString = queryString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
@@ -54,6 +58,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         })
         task.resume()
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        if let dic = userInfo["aps"]  {
+            if application.applicationState == .Active {
+                showAlertView(dic.valueForKey("alert") as! String, viewcontroller: window!.rootViewController!)
+            } else {
+                
+            }
+        }
     }
     
     func applicationWillResignActive(application: UIApplication) {

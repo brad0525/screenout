@@ -11,46 +11,6 @@ import CoreLocation
 import Foundation
 import MapKit
 
-struct Network {
-    var url = "https://screenout.datadesignsystems.com"
-    var session: NSURLSession? {
-        get {
-            
-            let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-            sessionConfig.HTTPMaximumConnectionsPerHost = 2
-            sessionConfig.timeoutIntervalForRequest = 5
-            return NSURLSession(configuration: sessionConfig)
-        }
-    }
-}
-
-struct Device {
-    var uuid = UIDevice.currentDevice().identifierForVendor!.UUIDString
-    var name = UIDevice.currentDevice().name
-    var state = UIApplication.sharedApplication().applicationState
-    var inactive = UIApplication.sharedApplication().applicationState == .Inactive
-   
-    
-   
-}
-
-
-
-struct Speed {
-    var current = 0.0
-    var max = 5.0
-    var mph: Double {
-        get {
-            if current < 0 {
-                return 0
-            }
-            
-            // 1 m/s = 2.2369362920544025 m/h
-            return current * 2.2369362920544025
-        }
-    }
-}
-
 class DashboardViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var adminView: UIView!
@@ -64,6 +24,7 @@ class DashboardViewController: UIViewController {
     private var speed = Speed()
     private let timerInterval: NSTimeInterval = 2.0
     private let notificationDelay: NSTimeInterval = 5.0
+    var messageViewController:MessageViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +41,10 @@ class DashboardViewController: UIViewController {
                 })
             }
         })
+        
+        // load applicationIconBadgeNumber when first load view.
+        messageViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MessageViewController") as? MessageViewController
+        messageViewController?.getMessage()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -94,6 +59,9 @@ class DashboardViewController: UIViewController {
         
         UserLocation.sharedInstance.stopUpdatingLocation()
         self.stopTrackingTimer()
+    }
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
     }
     
     
@@ -160,6 +128,11 @@ class DashboardViewController: UIViewController {
         }
     }
     
+    @IBAction func messageButtonClicked(sender: AnyObject) {
+        messageViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MessageViewController") as? MessageViewController
+        self.navigationController?.pushViewController(messageViewController!, animated: true)
+    }
+    
     // MARK: Tracking Timer
     
     func startTrackingTimer() {
@@ -171,7 +144,6 @@ class DashboardViewController: UIViewController {
     }
     
     func checkSpeedAndUpdateAdmin() {
-        print("running in background")
         // update admin
         if let latitude = UserLocation.sharedInstance.currentLocation2d?.latitude {
             latitudeLabel.text = "\(latitude)"
