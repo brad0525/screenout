@@ -187,7 +187,7 @@ extension MessageViewController: MGSwipeTableCellDelegate {
         // 0 : delete
         // 1 : unread
         if index == 0  {
-            isRead = "delete"
+            isRead = "deleted"
         } else {
             isRead = "no"
         }
