@@ -421,7 +421,7 @@
                                     <constraint firstAttribute="height" constant="22" id="ZeA-C6-LZq"/>
                                 </constraints>
                                 <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="commentIcon">
+                                <state key="normal" backgroundImage="commentIcon">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -660,7 +660,7 @@
     </scenes>
     <resources>
         <image name="active_screenout.png" width="592" height="125"/>
-        <image name="commentIcon" width="150" height="150"/>
+        <image name="commentIcon" width="128" height="128"/>
         <image name="non_active_screenout.png" width="592" height="125"/>
     </resources>
 </document>
