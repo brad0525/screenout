@@ -27,17 +27,17 @@ class IntroViewController: UIViewController {
     }
     
     func checkAPIKey() {
+        openAlertInputCode()
+    }
+    
+    func openAlertInputCode() {
         let alertController = UIAlertController(title: "Please input code to access ScreenOut", message: "", preferredStyle: UIAlertControllerStyle.Alert)
         let saveAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {
             alert -> Void in
             
             let firstTextField = alertController.textFields![0] as UITextField
-            var code = ""
-//            #if DEBUG
-//                code = "6s0K8980"
-//            #else
-                code = firstTextField.text!
-//            #endif
+            let code = firstTextField.text!
+            
             APIClient.sharedInstance.verifyUserCode(code, callbackSucceed: { (dic:NSDictionary) in
                 
                 if let apikey = dic["apikey"] as? String {
@@ -48,20 +48,15 @@ class IntroViewController: UIViewController {
                 }, callbackError: { (error:String) in
                     let alert = UIAlertController(title: "ScreenOut", message: error, preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (alert:UIAlertAction) in
-                        exit(0)
+                        self.openAlertInputCode()
                     }))
                     self.presentViewController(alert, animated: true, completion: nil)
             })
         })
-        
-        
-        
         alertController.addTextFieldWithConfigurationHandler { (textField : UITextField!) -> Void in
             textField.placeholder = "Enter code here"
         }
-        
         alertController.addAction(saveAction)
-        
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
