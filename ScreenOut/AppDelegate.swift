@@ -15,16 +15,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
         let config = UAConfig.defaultConfig()
         UAirship.takeOff(config)
         UAirship.push().userPushNotificationsEnabled = true
         UAirship.push()
         
+        return true
+    }
+    
+    func registerUAirshipAndPushNotification() {
+        
+        
+        let application = UIApplication.sharedApplication()
         application.idleTimerDisabled = true
         application.cancelAllLocalNotifications()
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [UIUserNotificationType.Sound, UIUserNotificationType.Alert], categories: nil))
-        
-        return true
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {

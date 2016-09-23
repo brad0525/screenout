@@ -21,6 +21,7 @@
 		07E8728519D525DA00FDE23D /* ScreenOutKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E8728419D525DA00FDE23D /* ScreenOutKitTests.swift */; };
 		07F717A219D798A200F22E48 /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F717A119D798A200F22E48 /* IntroViewController.swift */; };
 		07F717A519D7A7EE00F22E48 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F717A419D7A7EE00F22E48 /* UserLocation.swift */; };
+		202F3DAD1D941DEB00EC9135 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202F3DAC1D941DEB00EC9135 /* APIClient.swift */; };
 		206F2AEC1CB2A15200C23F25 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F2AEB1CB2A15200C23F25 /* MessageViewController.swift */; };
 		206F2AEF1CB2A41F00C23F25 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F2AEE1CB2A41F00C23F25 /* MessageTableViewCell.swift */; };
 		206F2AF71CB2A89100C23F25 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 206F2AF21CB2A89100C23F25 /* Info.plist */; };
@@ -108,6 +109,7 @@
 		07E8728419D525DA00FDE23D /* ScreenOutKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenOutKitTests.swift; sourceTree = "<group>"; };
 		07F717A119D798A200F22E48 /* IntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
 		07F717A419D7A7EE00F22E48 /* UserLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
+		202F3DAC1D941DEB00EC9135 /* APIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		206F2AEB1CB2A15200C23F25 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		206F2AEE1CB2A41F00C23F25 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		206F2AF21CB2A89100C23F25 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 		07D9287719CD20F8002FF0A0 /* ScreenOut */ = {
 			isa = PBXGroup;
 			children = (
+				202F3DAB1D941DE400EC9135 /* Network */,
 				206F2B271CB2BC2000C23F25 /* Utility */,
 				206F2AF01CB2A89100C23F25 /* Library */,
 				206F2AED1CB2A40300C23F25 /* View */,
@@ -279,6 +282,14 @@
 				07F717A419D7A7EE00F22E48 /* UserLocation.swift */,
 			);
 			name = Location;
+			sourceTree = "<group>";
+		};
+		202F3DAB1D941DE400EC9135 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				202F3DAC1D941DEB00EC9135 /* APIClient.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		206F2AED1CB2A40300C23F25 /* View */ = {
@@ -555,6 +566,7 @@
 				206F2AEF1CB2A41F00C23F25 /* MessageTableViewCell.swift in Sources */,
 				206F2B2D1CB3E9E300C23F25 /* MBProgressHUD.m in Sources */,
 				07F717A519D7A7EE00F22E48 /* UserLocation.swift in Sources */,
+				202F3DAD1D941DEB00EC9135 /* APIClient.swift in Sources */,
 				206F2AEC1CB2A15200C23F25 /* MessageViewController.swift in Sources */,
 				206F2AF91CB2A89100C23F25 /* MGSwipeTableCell.m in Sources */,
 				206F2B291CB2BC4300C23F25 /* Constant.swift in Sources */,
@@ -705,6 +717,7 @@
 				INFOPLIST_FILE = ScreenOut/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.datadesignsystems.ScreenOutDevelopmentGPS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "161c2945-1d0d-4fb5-89be-b2d689415a10";

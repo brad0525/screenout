@@ -52,6 +52,8 @@ class DashboardViewController: UIViewController {
         
         UserLocation.sharedInstance.startUpdatingLocation()
         self.startTrackingTimer()
+        
+        performSelector(#selector(trackPush), withObject: nil, afterDelay: 5.0)
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -63,6 +65,8 @@ class DashboardViewController: UIViewController {
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
+    
+    // MARK:
     
     
     // MARK: Maxspeed threshold
@@ -168,6 +172,51 @@ class DashboardViewController: UIViewController {
     
     
     // MARK: Tracking Action
+    
+    func trackPush() {
+        let deviceName = Device().name
+        let deviceID = Device().uuid
+        let deviceType = UIDevice.currentDevice().modelName
+        let action = "Speed Change"
+        let speed = "\(self.speed.mph)"
+        let maxSpeed = "\(self.speed.max)"
+        var longitude = ""
+        var latitude = ""
+        if let tempLongitude = UserLocation.sharedInstance.currentLocation2d?.longitude {
+            longitude = "\(tempLongitude)"
+        }
+        if let tempLatitude = UserLocation.sharedInstance.currentLocation2d?.latitude {
+            latitude = "\(tempLatitude)"
+        }
+        let isLocked = "\(Device().inactive)"
+        let disconnectedStatus = "true"
+        let maxSpeedChangeCount = "3"
+        
+
+
+        APIClient.sharedInstance.push(deviceName, deviceID: deviceID, deviceType: deviceType, action: action, speed: speed, maxSpeed: maxSpeed, latitude: latitude, longitude: longitude, islocked: isLocked, disconnectedStatus: disconnectedStatus, maxSpeedChangeCount: maxSpeedChangeCount, callbackSucceed: { (dic:NSDictionary) in
+            
+            if let delay = dic["delay"] as? Double {
+                self.performSelector(#selector(self.trackPush), withObject: nil, afterDelay: delay)
+            }
+            
+        }) { (error:NSDictionary) in
+            if let code = error["code"] as? String {
+                if let errorMessage = error["message"] as? String {
+                    if code == "401" {
+                        let alert = UIAlertController(title: "ScreenOut", message: errorMessage, preferredStyle: UIAlertControllerStyle.Alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { (alert:UIAlertAction) in
+                            exit(0)
+                        }))
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    }
+                    else {
+                        showAlertView(errorMessage, viewcontroller: self)
+                    }
+                }
+            }
+        }
+    }
     
     func trackCheckin() {
         
