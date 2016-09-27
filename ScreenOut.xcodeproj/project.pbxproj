@@ -32,8 +32,6 @@
 		206F2B211CB2B7CF00C23F25 /* non_active_screenout.png in Resources */ = {isa = PBXBuildFile; fileRef = 206F2B1F1CB2B7CF00C23F25 /* non_active_screenout.png */; };
 		206F2B291CB2BC4300C23F25 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206F2B281CB2BC4300C23F25 /* Constant.swift */; };
 		206F2B2D1CB3E9E300C23F25 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 206F2B2C1CB3E9E300C23F25 /* MBProgressHUD.m */; };
-		209190921CAAFAF400FD33D8 /* Airship in Resources */ = {isa = PBXBuildFile; fileRef = 209190901CAAFAF400FD33D8 /* Airship */; };
-		209190931CAAFAF400FD33D8 /* AirshipKit in Resources */ = {isa = PBXBuildFile; fileRef = 209190911CAAFAF400FD33D8 /* AirshipKit */; };
 		2091909C1CAAFB8300FD33D8 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2091909B1CAAFB8300FD33D8 /* AirshipConfig.plist */; };
 		2091909D1CAAFCCF00FD33D8 /* AirshipKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209190991CAAFB2200FD33D8 /* AirshipKit.framework */; };
 		2091909E1CAAFE7700FD33D8 /* AirshipKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209190991CAAFB2200FD33D8 /* AirshipKit.framework */; };
@@ -520,11 +518,9 @@
 				07D9288019CD20F8002FF0A0 /* Main.storyboard in Resources */,
 				206F2AF71CB2A89100C23F25 /* Info.plist in Resources */,
 				2091909C1CAAFB8300FD33D8 /* AirshipConfig.plist in Resources */,
-				209190921CAAFAF400FD33D8 /* Airship in Resources */,
 				206F2B211CB2B7CF00C23F25 /* non_active_screenout.png in Resources */,
 				07ACD2901A54B31A00F14F46 /* compass.png in Resources */,
 				206F2B201CB2B7CF00C23F25 /* active_screenout.png in Resources */,
-				209190931CAAFAF400FD33D8 /* AirshipKit in Resources */,
 				07D9288219CD20F8002FF0A0 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
