@@ -43,11 +43,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSUserDefaults.standardUserDefaults().setObject(deviceTokenString, forKey: UserDefaultKey.kDeviceToken)
         NSUserDefaults.standardUserDefaults().synchronize()
         
-        APIClient.sharedInstance.pushNotificationKey(deviceTokenString, callbackSucceed: { (dic:NSDictionary) in
-            
-        }) { (error:String) in
-            
+        if UserDefaultKey.apikey != nil {
+            APIClient.sharedInstance.pushNotificationKey(deviceTokenString, callbackSucceed: { (dic:NSDictionary) in
+                
+            }) { (error:String) in
+                
+            }
         }
+        
         /*
         
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true

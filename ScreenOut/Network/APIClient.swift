@@ -13,13 +13,12 @@ class APIClient {
     
     private var baseURL = "https://api.managesync.com/screenout/"
     private var verifyUserCodeAPI = "verify-user-code/"
-    private static var APIKey = "\(UserDefaultKey.apikey!)/"
-    private var pushAPI = "push/" + APIClient.APIKey
-    private var pushNotificationKeyAPI = "push-notification-key/" + APIClient.APIKey
-    private var homebaseAPI = "homebase/" + APIClient.APIKey
-    private var commentsAPI = "comments/" + APIClient.APIKey
-    private var viewNotificationsAPI = "view-notifications/" + APIClient.APIKey
-    private var markNotificationReadAPI = "mark-notification-read/" + APIClient.APIKey
+    private var pushAPI = "push/"
+    private var pushNotificationKeyAPI = "push-notification-key/"
+    private var homebaseAPI = "homebase/"
+    private var commentsAPI = "comments/"
+    private var viewNotificationsAPI = "view-notifications/"
+    private var markNotificationReadAPI = "mark-notification-read/"
     
     private func dataToDict(data: NSData?) -> NSDictionary {
         if let theData = data {
@@ -80,7 +79,7 @@ class APIClient {
     
     func push(deviceName:String, deviceID:String, deviceType:String, action:String, speed:String, maxSpeed: String, latitude: String, longitude: String, islocked:String, disconnectedStatus:String, maxSpeedChangeCount:String, callbackSucceed: (NSDictionary) -> (), callbackError: (NSDictionary) -> ()) {
         
-        let queryString = (baseURL + pushAPI) + "data?deviceName=\(deviceName)&deviceid=\(deviceID)&deviceType=\(deviceType)&action=\(action)&speed=\(speed)&maxspeed=\(maxSpeed)&latitude=\(latitude)&longitude=\(longitude)&islocked=\(islocked)&disconnectedStatus=\(disconnectedStatus)&maxSpeedChangeCount=\(maxSpeedChangeCount)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        let queryString = (baseURL + pushAPI) + "\(UserDefaultKey.apikey!)/" + "data?deviceName=\(deviceName)&deviceid=\(deviceID)&deviceType=\(deviceType)&action=\(action)&speed=\(speed)&maxspeed=\(maxSpeed)&latitude=\(latitude)&longitude=\(longitude)&islocked=\(islocked)&disconnectedStatus=\(disconnectedStatus)&maxSpeedChangeCount=\(maxSpeedChangeCount)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         let url = NSURL(string: queryString)!
         
         postForDict(url, callbackSucceed: { (dic:NSDictionary) in
@@ -103,7 +102,7 @@ class APIClient {
     
     func pushNotificationKey(token:String, callbackSucceed: (NSDictionary) -> (), callbackError: (String) -> ()) {
         
-        let queryString = (baseURL + pushNotificationKeyAPI) + "data?token=\(token)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        let queryString = (baseURL + pushNotificationKeyAPI) + "\(UserDefaultKey.apikey!)/" + "data?token=\(token)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         let url = NSURL(string: queryString)!
         
         postForDict(url, callbackSucceed: { (dic:NSDictionary) in
@@ -122,7 +121,7 @@ class APIClient {
     
     func homebase(latitude: String, longitude: String, callbackSucceed: (NSDictionary) -> (), callbackError: (String) -> ()) {
         
-        let queryString = (baseURL + homebaseAPI) + "data?latitude=\(latitude)&longitude=\(longitude)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        let queryString = (baseURL + homebaseAPI) + "\(UserDefaultKey.apikey!)/" + "data?latitude=\(latitude)&longitude=\(longitude)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         let url = NSURL(string: queryString)!
         
         postForDict(url, callbackSucceed: { (dic:NSDictionary) in
@@ -143,7 +142,7 @@ class APIClient {
     
     func comments(email: String, comments: String, callbackSucceed: (NSDictionary) -> (), callbackError: (String) -> ()) {
         
-        let queryString = (baseURL + commentsAPI) + "data?email=\(email)&comments=\(comments)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        let queryString = (baseURL + commentsAPI) + "\(UserDefaultKey.apikey!)/" + "data?email=\(email)&comments=\(comments)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         let url = NSURL(string: queryString)!
         
         postForDict(url, callbackSucceed: { (dic:NSDictionary) in
@@ -162,7 +161,7 @@ class APIClient {
     
     func viewNotifications(push: String, callbackSucceed: (NSDictionary) -> (), callbackError: (String) -> ()) {
         
-        let queryString = (baseURL + viewNotificationsAPI) + "data?push=\(push)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        let queryString = (baseURL + viewNotificationsAPI) + "\(UserDefaultKey.apikey!)/" + "data?push=\(push)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         let url = NSURL(string: queryString)!
         
         postForDict(url, callbackSucceed: { (dic:NSDictionary) in
@@ -184,7 +183,7 @@ class APIClient {
     
     func markNotificationRead(messageID: String, isRead: String, callbackSucceed: (NSDictionary) -> (), callbackError: (String) -> ()) {
         
-        let queryString = (baseURL + markNotificationReadAPI) + "data?messageId=\(messageID)&isRead=\(isRead)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        let queryString = (baseURL + markNotificationReadAPI) + "\(UserDefaultKey.apikey!)/" + "data?messageId=\(messageID)&isRead=\(isRead)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         let url = NSURL(string: queryString)!
         
         postForDict(url, callbackSucceed: { (dic:NSDictionary) in
