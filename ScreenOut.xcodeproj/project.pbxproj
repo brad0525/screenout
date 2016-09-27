@@ -454,7 +454,7 @@
 				TargetAttributes = {
 					07D9287419CD20F8002FF0A0 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = KJ2QX8VTUE;
+						DevelopmentTeam = 44F59823Z6;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -711,8 +711,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Bradley Amster (D4WU7UED37)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bradley Amster (D4WU7UED37)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = ScreenOut/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -720,7 +720,7 @@
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.datadesignsystems.ScreenOutDevelopmentGPS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "161c2945-1d0d-4fb5-89be-b2d689415a10";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ScreenOut/Screenout-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
