@@ -44,6 +44,35 @@ class MessageViewController: UIViewController {
         if deviceToken == nil {
             deviceToken = ""
         }
+        
+        showProgressHUD(self)
+        APIClient.sharedInstance.viewNotifications(deviceToken!, callbackSucceed: { (data:NSDictionary) in
+            let result = data.valueForKey("result") as? String
+            if result == "error" {
+                showAlertView(data.valueForKey("message") as! String, viewcontroller: self)
+            } else {
+                if let tempMessages = data.valueForKey("message") as? Array<NSDictionary> {
+                    self.messages = tempMessages
+                }
+            }
+            var unreadCount : Int = 0
+            for dic in self.messages {
+                if dic["isRead"] as? String == "no" {
+                    unreadCount += 1
+                }
+            }
+            UIApplication.sharedApplication().applicationIconBadgeNumber = unreadCount
+            self.messageTableView.reloadData()
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+            hideProgressHUD(self)
+
+            
+        }) { (errorMsg:String) in
+            hideProgressHUD(self)
+            showAlertView(errorMsg, viewcontroller: self)
+        }
+        
+        /*
         showProgressHUD(self)
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let queryString = "requestType=getMessages&deviceToken=\(deviceToken!)"
@@ -87,9 +116,25 @@ class MessageViewController: UIViewController {
             })
         })
         task.resume()
+         */
     }
     
-    func updateMessage(isRead:String, messageID:String, completionHandler:(success: Bool, error:NSError?) -> Void){
+    func updateMessage(isRead:String, messageID:String, completionHandler:(success: Bool, errorMsg:String?) -> Void){
+        
+        showProgressHUD(self)
+        APIClient.sharedInstance.markNotificationRead(messageID, isRead: isRead, callbackSucceed: { (data:NSDictionary) in
+            hideProgressHUD(self)
+            if let result = data.valueForKey("result") as? String {
+                if result == "success" {
+                    completionHandler(success: true, errorMsg: nil)
+                }
+            }
+        }) { (errorMsg:String) in
+            hideProgressHUD(self)
+            completionHandler(success: false, errorMsg: errorMsg)
+        }
+        
+        /*
         showProgressHUD(self)
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let queryString = "requestType=readNotification&isRead=\(isRead)&messageId=\(messageID)"
@@ -121,6 +166,7 @@ class MessageViewController: UIViewController {
             })
         })
         task.resume()
+         */
     }
     
     // MARK: - UITableView data source, delegate
@@ -167,11 +213,11 @@ class MessageViewController: UIViewController {
         let messageID = dic["id"] as! String
         let isRead = flag
         
-        updateMessage(isRead, messageID: messageID) { (success:Bool, error:NSError?) in
+        updateMessage(isRead, messageID: messageID) { (success:Bool, errorMsg:String?) in
             if success == true {
                 self.getMessage()
             } else {
-                showAlertView(error!.localizedDescription, viewcontroller: self)
+                showAlertView(errorMsg!, viewcontroller: self)
             }
         }
     }

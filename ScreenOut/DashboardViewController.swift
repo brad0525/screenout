@@ -227,6 +227,16 @@ class DashboardViewController: UIViewController {
             let longitude = currentLocation.longitude
             let latitude = currentLocation.latitude
             
+            APIClient.sharedInstance.homebase("\(latitude)", longitude : "\(longitude)", callbackSucceed: { (dic:NSDictionary) in
+                let alert = UIAlertView(title: "Coordinates sent successfully", message: "Your current location has been set on the server.", delegate: nil, cancelButtonTitle: "OK")
+                alert.show()
+            }, callbackError: { (error:String) in
+                let alert = UIAlertView(title: "An error has occurred", message: "Your current location was not set on the server.", delegate: nil, cancelButtonTitle: "OK")
+                alert.show()
+            })
+            
+            /*
+            
             var queryString = "name=\(Device().name)&id=\(Device().uuid)&long=\(longitude)&lat=\(latitude)&key=549034ea50c6a6ccfc25a49f&isLocked=\(Device().state)"
             var escapedString = queryString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
             var urlString = "\(Network().url)/homebase.php?" + escapedString!
@@ -250,11 +260,11 @@ class DashboardViewController: UIViewController {
                 }
             })
             task.resume()
-            
+            */
         } else {
             // pop alert with location unavailable yet
             
-            var alert = UIAlertView(title: "Location Unavailable", message: "Location services unavailable. Please try again shortly.", delegate: nil, cancelButtonTitle: "OK")
+            let alert = UIAlertView(title: "Location Unavailable", message: "Location services unavailable. Please try again shortly.", delegate: nil, cancelButtonTitle: "OK")
             alert.show()
         }
     }

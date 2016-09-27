@@ -14,6 +14,9 @@ class IntroViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        #if DEBUG
+//            UserDefaultKey.apikey = "f01e119946e3cec8e08dcfbe11cf89d4"
+//        #endif
         
         if (UserDefaultKey.apikey != nil) {
             self.alertContainerView.alpha = 1

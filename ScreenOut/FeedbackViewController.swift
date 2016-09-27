@@ -40,11 +40,11 @@ class FeedbackViewController: UIViewController, UITextViewDelegate {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-    internal func handleFeedbackError(error:NSError) {
+    internal func handleFeedbackError(error:String) {
         self.feedbackButton.enabled = true
         self.cancelButton.enabled = true
         
-        let alert = UIAlertView(title: "Message failed", message: error.localizedDescription, delegate: nil, cancelButtonTitle: "OK")
+        let alert = UIAlertView(title: "Message failed", message: error, delegate: nil, cancelButtonTitle: "OK")
         alert.show()
     }
     
@@ -59,6 +59,15 @@ class FeedbackViewController: UIViewController, UITextViewDelegate {
     }
     
     internal func sendFeedback() {
+        let email = self.emailTextField.text!
+        let comments = self.feedbackTextView.text!
+        APIClient.sharedInstance.comments(email, comments: comments, callbackSucceed: { (dic:NSDictionary) in
+            self.handleSuccess()
+        }) { (error:String) in
+            self.handleFeedbackError(error)
+        }
+        
+        /*
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
         var queryString = "id=\(Device().uuid)&email=\(self.emailTextField.text)&msg=\(self.feedbackTextView.text)"
@@ -82,6 +91,7 @@ class FeedbackViewController: UIViewController, UITextViewDelegate {
             }
         })
         task.resume()
+         */
     }
     
     // MARK: TextViewDelegate

@@ -13,7 +13,13 @@ class APIClient {
     
     private var baseURL = "https://api.managesync.com/screenout/"
     private var verifyUserCodeAPI = "verify-user-code/"
-    private var pushAPI = "push/"
+    private static var APIKey = "\(UserDefaultKey.apikey!)/"
+    private var pushAPI = "push/" + APIClient.APIKey
+    private var pushNotificationKeyAPI = "push-notification-key/" + APIClient.APIKey
+    private var homebaseAPI = "homebase/" + APIClient.APIKey
+    private var commentsAPI = "comments/" + APIClient.APIKey
+    private var viewNotificationsAPI = "view-notifications/" + APIClient.APIKey
+    private var markNotificationReadAPI = "mark-notification-read/" + APIClient.APIKey
     
     private func dataToDict(data: NSData?) -> NSDictionary {
         if let theData = data {
@@ -74,7 +80,7 @@ class APIClient {
     
     func push(deviceName:String, deviceID:String, deviceType:String, action:String, speed:String, maxSpeed: String, latitude: String, longitude: String, islocked:String, disconnectedStatus:String, maxSpeedChangeCount:String, callbackSucceed: (NSDictionary) -> (), callbackError: (NSDictionary) -> ()) {
         
-        let queryString = (baseURL + pushAPI) + "\(UserDefaultKey.apikey!)/data?deviceName=\(deviceName)&deviceid=\(deviceID)&deviceType=\(deviceType)&action=\(action)&speed=\(speed)&maxspeed=\(maxSpeed)&latitude=\(latitude)&longitude=\(longitude)&islocked=\(islocked)&disconnectedStatus=\(disconnectedStatus)&maxSpeedChangeCount=\(maxSpeedChangeCount)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        let queryString = (baseURL + pushAPI) + "data?deviceName=\(deviceName)&deviceid=\(deviceID)&deviceType=\(deviceType)&action=\(action)&speed=\(speed)&maxspeed=\(maxSpeed)&latitude=\(latitude)&longitude=\(longitude)&islocked=\(islocked)&disconnectedStatus=\(disconnectedStatus)&maxSpeedChangeCount=\(maxSpeedChangeCount)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         let url = NSURL(string: queryString)!
         
         postForDict(url, callbackSucceed: { (dic:NSDictionary) in
@@ -93,7 +99,110 @@ class APIClient {
             callbackError(["message" : error.localizedDescription, "code" : error.code])
             
         }
-
+    }
+    
+    func pushNotificationKey(token:String, callbackSucceed: (NSDictionary) -> (), callbackError: (String) -> ()) {
+        
+        let queryString = (baseURL + pushNotificationKeyAPI) + "data?token=\(token)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        let url = NSURL(string: queryString)!
+        
+        postForDict(url, callbackSucceed: { (dic:NSDictionary) in
+            if let data = dic["data"] as? NSDictionary {
+                if let code = data["responseCode"] as? String where code == "301" {
+                    callbackError(data["description"] as! String)
+                }
+                else {
+                    callbackSucceed(data)
+                }
+            }
+        }) { (error:NSError) in
+            callbackError(error.localizedDescription)
+        }
+    }
+    
+    func homebase(latitude: String, longitude: String, callbackSucceed: (NSDictionary) -> (), callbackError: (String) -> ()) {
+        
+        let queryString = (baseURL + homebaseAPI) + "data?latitude=\(latitude)&longitude=\(longitude)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        let url = NSURL(string: queryString)!
+        
+        postForDict(url, callbackSucceed: { (dic:NSDictionary) in
+            if let data = dic["data"] as? NSDictionary {
+                if let code = data["responseCode"] as? String where code == "301" {
+                    callbackError(data["description"] as! String)
+                }
+                else {
+                    callbackSucceed(data)
+                }
+            }
+        }) { (error:NSError) in
+            callbackError(error.localizedDescription)
+        }
+    }
+    
+    
+    
+    func comments(email: String, comments: String, callbackSucceed: (NSDictionary) -> (), callbackError: (String) -> ()) {
+        
+        let queryString = (baseURL + commentsAPI) + "data?email=\(email)&comments=\(comments)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        let url = NSURL(string: queryString)!
+        
+        postForDict(url, callbackSucceed: { (dic:NSDictionary) in
+            if let data = dic["data"] as? NSDictionary {
+                if let code = data["responseCode"] as? String where code == "301" {
+                    callbackError(data["description"] as! String)
+                }
+                else {
+                    callbackSucceed(data)
+                }
+            }
+        }) { (error:NSError) in
+            callbackError(error.localizedDescription)
+        }
+    }
+    
+    func viewNotifications(push: String, callbackSucceed: (NSDictionary) -> (), callbackError: (String) -> ()) {
+        
+        let queryString = (baseURL + viewNotificationsAPI) + "data?push=\(push)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        let url = NSURL(string: queryString)!
+        
+        postForDict(url, callbackSucceed: { (dic:NSDictionary) in
+            if let data = dic["data"] as? NSDictionary {
+                #if DEBUG
+                    print(data)
+                #endif
+                if let code = data["responseCode"] as? String where code == "301" {
+                    callbackError(data["description"] as! String)
+                }
+                else {
+                    callbackSucceed(data)
+                }
+            }
+        }) { (error:NSError) in
+            callbackError(error.localizedDescription)
+        }
+    }
+    
+    func markNotificationRead(messageID: String, isRead: String, callbackSucceed: (NSDictionary) -> (), callbackError: (String) -> ()) {
+        
+        let queryString = (baseURL + markNotificationReadAPI) + "data?messageId=\(messageID)&isRead=\(isRead)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        let url = NSURL(string: queryString)!
+        
+        postForDict(url, callbackSucceed: { (dic:NSDictionary) in
+            print(dic)
+            if let data = dic["data"] as? NSDictionary {
+                if let code = data["responseCode"] as? String where code == "301" {
+                    callbackError(data["description"] as! String)
+                }
+                else {
+                    callbackSucceed(data)
+                } 
+            }
+            else {
+                callbackError("Unknown error")
+            }
+        }) { (error:NSError) in
+            callbackError(error.localizedDescription)
+        }
     }
     
 }

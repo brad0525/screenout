@@ -43,6 +43,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSUserDefaults.standardUserDefaults().setObject(deviceTokenString, forKey: UserDefaultKey.kDeviceToken)
         NSUserDefaults.standardUserDefaults().synchronize()
         
+        APIClient.sharedInstance.pushNotificationKey(deviceTokenString, callbackSucceed: { (dic:NSDictionary) in
+            
+        }) { (error:String) in
+            
+        }
+        /*
+        
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         let queryString = "deviceId=\(Device().name)&token=\(deviceTokenString)"
         let escapedString = queryString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
@@ -64,6 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         })
         task.resume()
+         */
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
