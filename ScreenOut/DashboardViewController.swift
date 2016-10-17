@@ -45,6 +45,14 @@ class DashboardViewController: UIViewController {
         // load applicationIconBadgeNumber when first load view.
         messageViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MessageViewController") as? MessageViewController
         messageViewController?.getMessage()
+        
+        if let deviceTokenString = NSUserDefaults.standardUserDefaults().objectForKey(UserDefaultKey.kDeviceToken) as? String{
+            APIClient.sharedInstance.pushNotificationKey(deviceTokenString, callbackSucceed: { (dic:NSDictionary) in
+                
+            }) { (error:String) in
+                
+            }
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
