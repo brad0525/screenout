@@ -20,11 +20,20 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var maxSpeedLabel: UILabel!
     @IBOutlet weak var speedLabel: UILabel!
     
+    //NUMBER OF NOTIFICAITON
+    @IBOutlet weak var notificationView: UIView!
+    @IBOutlet weak var notificationNumberLabel: UILabel!
+    @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var locationView: UIView!
+    
+    
+    private var numberUnreadMessage : Int = 0
     private var trackingTimer = NSTimer()
     private var speed = Speed()
     private let timerInterval: NSTimeInterval = 2.0
     private let notificationDelay: NSTimeInterval = 5.0
-    var messageViewController:MessageViewController?
+    
+    // MARK: View life circle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,9 +52,13 @@ class DashboardViewController: UIViewController {
         })
         
         // load applicationIconBadgeNumber when first load view.
-        messageViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MessageViewController") as? MessageViewController
-        messageViewController?.getMessage()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(toggleMenuButton))
+        notificationView.userInteractionEnabled = true
+        notificationView.addGestureRecognizer(tap)
+
         
+        
+        // force update device token to database
         if let deviceTokenString = NSUserDefaults.standardUserDefaults().objectForKey(UserDefaultKey.kDeviceToken) as? String{
             APIClient.sharedInstance.pushNotificationKey(deviceTokenString, callbackSucceed: { (dic:NSDictionary) in
                 
@@ -53,6 +66,18 @@ class DashboardViewController: UIViewController {
                 
             }
         }
+        
+        // menu
+        self.revealViewController().rearViewRevealWidth = self.view.frame.width - 50
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        
+        // navigationController
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+        navigationController?.navigationBar.translucent = false
+        
+        //
+        notificationView.hidden = true
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -62,6 +87,9 @@ class DashboardViewController: UIViewController {
         self.startTrackingTimer()
         
         performSelector(#selector(trackPush), withObject: nil, afterDelay: 5.0)
+        
+        // getUnreadMessage
+        getUnreadMessage()
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -74,26 +102,81 @@ class DashboardViewController: UIViewController {
         return .LightContent
     }
     
-    // MARK:
+    // MARK: Internal function
     
+    internal func dismissLocationView () {
+        self.locationView.hidden = true
+    }
     
+    func getUnreadMessage(){
+        
+        var deviceToken = NSUserDefaults.standardUserDefaults().objectForKey(UserDefaultKey.kDeviceToken) as? String
+        if deviceToken == nil {
+            deviceToken = ""
+        }
+        
+        
+        APIClient.sharedInstance.viewNotifications(deviceToken!, callbackSucceed: { (data:NSDictionary) in
+            let result = data.valueForKey("result") as? String
+            var unreadCount : Int = 0
+            if result == "error" {
+                showAlertView(data.valueForKey("message") as! String, viewcontroller: self)
+            } else {
+                if let tempMessages = data.valueForKey("message") as? Array<NSDictionary> {
+                    for dic in tempMessages {
+                        if dic["isRead"] as? String == "no" {
+                            unreadCount += 1
+                        }
+                    }
+                }
+            }
+            
+            if unreadCount > 0 {
+                self.numberUnreadMessage = unreadCount
+                self.notificationNumberLabel.text = "\(self.numberUnreadMessage)"
+                self.notificationView.hidden = false
+            }
+            else {
+                self.notificationView.hidden = true
+            }
+            
+        }) { (errorMsg:String) in
+        }
+    }
+
+    internal func toggleMenuButton() {
+        let revealViewController = self.revealViewController()
+        if (revealViewController != nil) {
+            revealViewController.revealToggle(menuButton)
+            
+            if revealViewController.rearViewController is MenuViewController {
+                (revealViewController.rearViewController as! MenuViewController).numberOfUnreadNotification = numberUnreadMessage
+                (revealViewController.rearViewController as! MenuViewController).delegate = self
+            }
+        }
+    }
+    
+    // MARK: Actions
+    
+    @IBAction func menuButtonClicked(sender: AnyObject) {
+        toggleMenuButton()
+    }
     // MARK: Maxspeed threshold
     
     func fetchUserMaxSpeedWithCompletionHandler(completionHandler:(success: Bool) -> Void) {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
-        var queryString = "id=\(Device().uuid)"
-        var escapedString = queryString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
-        var urlString = "\(Network().url)/threshold.php?" + escapedString!
+        let queryString = "id=\(Device().uuid)"
+        let escapedString = queryString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
+        let urlString = "\(Network().url)/threshold.php?" + escapedString!
         
         let task = Network().session!.dataTaskWithURL(NSURL(string: urlString)!, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             if (error == nil) {
-                var jsonError: NSError?
+                
                 let jsonObject: AnyObject!
                 do {
                     jsonObject = try NSJSONSerialization.JSONObjectWithData(data!, options: [])
-                } catch var error as NSError {
-                    jsonError = error
+                } catch _ as NSError {
                     jsonObject = nil
                 } catch {
                     fatalError()
@@ -122,15 +205,6 @@ class DashboardViewController: UIViewController {
         task.resume()
     }
     
-    @IBAction func sendCheckinTapped(sender:AnyObject!) {
-        self.trackCheckin()
-    }
-    
-    @IBAction func openFeedback(sender:AnyObject!) {
-        let feedback = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("FeedbackViewController") as! FeedbackViewController
-        self.navigationController?.pushViewController(feedback, animated: true)
-    }
-    
     @IBAction func hideAdmin(_: AnyObject!) {
         if (adminBottomConstraint.constant == 0) {
             adminBottomConstraint.constant = -adminView.frame.size.height
@@ -140,15 +214,10 @@ class DashboardViewController: UIViewController {
         }
     }
     
-    @IBAction func messageButtonClicked(sender: AnyObject) {
-        messageViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MessageViewController") as? MessageViewController
-        self.navigationController?.pushViewController(messageViewController!, animated: true)
-    }
-    
     // MARK: Tracking Timer
     
     func startTrackingTimer() {
-        trackingTimer = NSTimer.scheduledTimerWithTimeInterval(timerInterval, target: self, selector: Selector("checkSpeedAndUpdateAdmin"), userInfo: nil, repeats: true)
+        trackingTimer = NSTimer.scheduledTimerWithTimeInterval(timerInterval, target: self, selector: #selector(checkSpeedAndUpdateAdmin), userInfo: nil, repeats: true)
     }
     
     func stopTrackingTimer() {
@@ -227,7 +296,6 @@ class DashboardViewController: UIViewController {
     }
     
     func trackCheckin() {
-        
         if let currentLocation = UserLocation.sharedInstance.currentLocation2d {
             
             UIApplication.sharedApplication().networkActivityIndicatorVisible = true
@@ -235,54 +303,33 @@ class DashboardViewController: UIViewController {
             let longitude = currentLocation.longitude
             let latitude = currentLocation.latitude
             
+            showProgressHUD(self)
+            
             APIClient.sharedInstance.homebase("\(latitude)", longitude : "\(longitude)", callbackSucceed: { (dic:NSDictionary) in
-                let alert = UIAlertView(title: "Coordinates sent successfully", message: "Your current location has been set on the server.", delegate: nil, cancelButtonTitle: "OK")
-                alert.show()
-            }, callbackError: { (error:String) in
-                let alert = UIAlertView(title: "An error has occurred", message: "Your current location was not set on the server.", delegate: nil, cancelButtonTitle: "OK")
-                alert.show()
+                hideProgressHUD(self)
+                self.locationView.hidden = false
+                NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(self.dismissLocationView), userInfo: nil, repeats: false)
+            
+                }, callbackError: { (error:String) in
+                    hideProgressHUD(self)
+                    let alert = UIAlertView(title: "An error has occurred", message: "Your current location was not set on the server.", delegate: nil, cancelButtonTitle: "OK")
+                    alert.show()
             })
-            
-            /*
-            
-            var queryString = "name=\(Device().name)&id=\(Device().uuid)&long=\(longitude)&lat=\(latitude)&key=549034ea50c6a6ccfc25a49f&isLocked=\(Device().state)"
-            var escapedString = queryString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
-            var urlString = "\(Network().url)/homebase.php?" + escapedString!
-            
-            let task = Network().session!.dataTaskWithURL(NSURL(string: urlString)!, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-                
-                if (error == nil) {
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                        
-                        var alert = UIAlertView(title: "Coordinates sent successfully", message: "Your current location has been set on the server.", delegate: nil, cancelButtonTitle: "OK")
-                        alert.show()
-                    })
-                } else {
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                        
-                        var alert = UIAlertView(title: "An error has occurred", message: "Your current location was not set on the server.", delegate: nil, cancelButtonTitle: "OK")
-                        alert.show()
-                    })
-                }
-            })
-            task.resume()
-            */
         } else {
             // pop alert with location unavailable yet
             
             let alert = UIAlertView(title: "Location Unavailable", message: "Location services unavailable. Please try again shortly.", delegate: nil, cancelButtonTitle: "OK")
             alert.show()
         }
+    
     }
     
     func trackAction(action: String) {
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         
-        var queryString = "name=\(Device().name)&id=\(Device().uuid)&action=\(action)&isLocked=\(Device().state)"
-        var escapedString = queryString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
-        var urlString = "\(Network().url)/data.php?" + escapedString!
+        let queryString = "name=\(Device().name)&id=\(Device().uuid)&action=\(action)&isLocked=\(Device().state)"
+        let escapedString = queryString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
+        let urlString = "\(Network().url)/data.php?" + escapedString!
         
         let task = Network().session!.dataTaskWithURL(NSURL(string: urlString)!, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
             
@@ -298,9 +345,9 @@ class DashboardViewController: UIViewController {
             if let longitude = UserLocation.sharedInstance.currentLocation2d?.longitude {
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = true
                 
-                var queryString = "name=\(Device().name)&id=\(Device().uuid)&action=\(action)&speed=\(self.speed.mph)&maxspeed=\(self.speed.max)&lat=\(latitude)&long=\(longitude)&isLocked=\(Device().inactive)"
-                var escapedString = queryString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
-                var urlString = "\(Network().url)/data.php?" + escapedString!
+                let queryString = "name=\(Device().name)&id=\(Device().uuid)&action=\(action)&speed=\(self.speed.mph)&maxspeed=\(self.speed.max)&lat=\(latitude)&long=\(longitude)&isLocked=\(Device().inactive)"
+                let escapedString = queryString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
+                let urlString = "\(Network().url)/data.php?" + escapedString!
                 
                 let task = Network().session!.dataTaskWithURL(NSURL(string: urlString)!, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
                     
@@ -345,5 +392,30 @@ class DashboardViewController: UIViewController {
         
         imageView.highlighted = false
         trackSpeedWithAction("ScreenOut deactivated")
+    }
+}
+
+// MARK: MenuViewControllerDelegate
+extension DashboardViewController : MenuViewControllerDelegate {
+    
+    func didClickHomeButon() {
+        toggleMenuButton()
+    }
+    
+    func didClickNotificationButton() {
+        toggleMenuButton()
+        let messageViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MessageViewController")
+        self.navigationController?.pushViewController(messageViewController, animated: true)
+    }
+    
+    func didClickSupportButton() {
+        toggleMenuButton()
+        let feedback = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("FeedbackViewController") as! FeedbackViewController
+        self.navigationController?.pushViewController(feedback, animated: true)
+    }
+    
+    func didClickSetLocationButton() {
+        toggleMenuButton()
+        trackCheckin()
     }
 }

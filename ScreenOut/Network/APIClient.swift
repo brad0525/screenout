@@ -65,12 +65,17 @@ class APIClient {
         
         postForDict(url, callbackSucceed: { (dic:NSDictionary) in
             if let data = dic["data"] as? NSDictionary {
-                if let code = data["responseCode"] as? String where code == "301" {
-                    callbackError(data["description"] as! String)
-                }
-                else {
-                    callbackSucceed(data)
-                }
+//                #if DEBUG
+//                    let dictionary = ["apikey" : "f01e119946e3cec8e08dcfbe11cf89d4"]
+//                    callbackSucceed(dictionary)
+//                #else
+                    if let code = data["responseCode"] as? String where code == "301" {
+                        callbackError(data["description"] as! String)
+                    }
+                    else {
+                        callbackSucceed(data)
+                    }
+//                #endif
             }
         }) { (error:NSError) in
             callbackError(error.localizedDescription)
@@ -140,9 +145,9 @@ class APIClient {
     
     
     
-    func comments(email: String, comments: String, callbackSucceed: (NSDictionary) -> (), callbackError: (String) -> ()) {
+    func comments(name: String, email: String, comments: String, callbackSucceed: (NSDictionary) -> (), callbackError: (String) -> ()) {
         
-        let queryString = (baseURL + commentsAPI) + "\(UserDefaultKey.apikey!)/" + "data?email=\(email)&comments=\(comments)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
+        let queryString = (baseURL + commentsAPI) + "\(UserDefaultKey.apikey!)/" + "data?email=\(email)&comments=\(comments)&name=\(name)".stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!
         let url = NSURL(string: queryString)!
         
         postForDict(url, callbackSucceed: { (dic:NSDictionary) in
@@ -187,7 +192,9 @@ class APIClient {
         let url = NSURL(string: queryString)!
         
         postForDict(url, callbackSucceed: { (dic:NSDictionary) in
-            print(dic)
+            #if DEBUG
+                print(dic)
+            #endif
             if let data = dic["data"] as? NSDictionary {
                 if let code = data["responseCode"] as? String where code == "301" {
                     callbackError(data["description"] as! String)

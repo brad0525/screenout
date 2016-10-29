@@ -11,4 +11,5 @@
 
 #import "MGSwipeTableCell.h"
 #import "MBProgressHUD.h"
+#import "SWRevealViewController.h"
 #endif /* Screenout_Bridging_Header_h */

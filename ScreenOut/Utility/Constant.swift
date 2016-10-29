@@ -89,8 +89,25 @@ func hideProgressHUD(viewController:UIViewController){
     MBProgressHUD.hideHUDForView(viewController.view, animated: true)
 }
 
+
+
+func showAlertView(message:String, viewcontroller:UIViewController, completionHandler:() -> Void) {
+    let alert = UIAlertController(title: "ScreenOut", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+//    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action:UIAlertAction) in
+        completionHandler()
+    }))
+    viewcontroller.presentViewController(alert, animated: true, completion: nil)
+}
+
 func showAlertView(message:String, viewcontroller:UIViewController){
     let alert = UIAlertController(title: "ScreenOut", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+    viewcontroller.presentViewController(alert, animated: true, completion: nil)
+}
+
+func showErrorAlertView(message:String, viewcontroller:UIViewController){
+    let alert = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.Alert)
     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
     viewcontroller.presentViewController(alert, animated: true, completion: nil)
 }

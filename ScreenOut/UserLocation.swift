@@ -42,6 +42,7 @@ class UserLocation: NSObject, CLLocationManagerDelegate
     }
     
     // MARK: Public class methods
+    
     func requestAuthorizedWhenInUseAccess() {
         locationManager.requestWhenInUseAuthorization()
     }
@@ -63,11 +64,11 @@ class UserLocation: NSObject, CLLocationManagerDelegate
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        var location: CLLocation = locations.last! as CLLocation
+        let location: CLLocation = locations.last! as CLLocation
         currentLocation2d = location.coordinate
         currentSpeed = location.speed
         
-        var notif = NSNotification(name: "UserLocationDidChange", object: self, userInfo: nil);
+        let notif = NSNotification(name: "UserLocationDidChange", object: self, userInfo: nil);
         NSNotificationCenter.defaultCenter().postNotification(notif)
     }
     

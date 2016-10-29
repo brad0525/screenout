@@ -26,7 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func registerUAirshipAndPushNotification() {
         
-        
         let application = UIApplication.sharedApplication()
         application.idleTimerDisabled = true
         application.cancelAllLocalNotifications()

@@ -11,11 +11,12 @@ import UIKit
 class MessageTableViewCell: MGSwipeTableCell {
 
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var contentMessageLabel: UILabel!
+    @IBOutlet weak var yellowReadView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        messageLabel.hidden = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

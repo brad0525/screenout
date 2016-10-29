@@ -16,12 +16,29 @@ class MessageViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        title = "Message"
+        title = "Notifications"
+        
+        // tableview
         messageTableView.rowHeight = UITableViewAutomaticDimension;
         messageTableView.estimatedRowHeight = 44.0;
-        getMessage()
+        messageTableView.tableFooterView = UIView()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // navigation controller
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image:UIImage(named: "backButton"), style:.Plain, target:self, action: #selector(backButtonPressed))
+        self.navigationController?.navigationBar.tintColor = UIColor.blackColor()
+        
+        
+        // api
+        getMessage()
+
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(true)
         navigationController?.setNavigationBarHidden(true, animated: true)
@@ -34,6 +51,12 @@ class MessageViewController: UIViewController {
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .Default
+    }
+    
+    // MARK: - Actions 
+    
+    func backButtonPressed() {
+        navigationController?.popViewControllerAnimated(true)
     }
     
     // MARK: - Methods
@@ -71,52 +94,6 @@ class MessageViewController: UIViewController {
             hideProgressHUD(self)
             showAlertView(errorMsg, viewcontroller: self)
         }
-        
-        /*
-        showProgressHUD(self)
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        let queryString = "requestType=getMessages&deviceToken=\(deviceToken!)"
-        let escapedString = queryString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
-        let urlString = "\(Network().url)/notes.php?" + escapedString!
-        let task = Network().session!.dataTaskWithURL(NSURL(string: urlString)!, completionHandler: { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                if (error == nil) {
-                    let jsonObject: NSDictionary?
-                    do {
-                        jsonObject = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as? NSDictionary
-                    }  catch {
-                        fatalError()
-                    }
-                    print(jsonObject)
-                    if let _ = jsonObject {
-                        if let data = jsonObject?.valueForKey("data") {
-                            let result = data.valueForKey("result") as? String
-                            if result == "error" {
-                                showAlertView(data.valueForKey("message") as! String, viewcontroller: self)
-                            } else {
-                                if let tempMessages = data.valueForKey("message") as? Array<NSDictionary> {
-                                    self.messages = tempMessages
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    showAlertView(error!.localizedDescription, viewcontroller: self)
-                }
-                var unreadCount : Int = 0
-                for dic in self.messages {
-                    if dic["isRead"] as? String == "no" {
-                        unreadCount += 1
-                    }
-                }
-                UIApplication.sharedApplication().applicationIconBadgeNumber = unreadCount
-                self.messageTableView.reloadData()
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                hideProgressHUD(self)
-            })
-        })
-        task.resume()
-         */
     }
     
     func updateMessage(isRead:String, messageID:String, completionHandler:(success: Bool, errorMsg:String?) -> Void){
@@ -172,7 +149,7 @@ class MessageViewController: UIViewController {
     // MARK: - UITableView data source, delegate
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
-        return 50
+        return 120
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -181,20 +158,22 @@ class MessageViewController: UIViewController {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         let reuseIdentifier = "MessageTableViewCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) as! MGSwipeTableCell!
+        var cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) as! MessageTableViewCell!
         if cell == nil
         {
-            cell = MGSwipeTableCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: reuseIdentifier)
+            cell = MessageTableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: reuseIdentifier)
         }
         cell.delegate = self
         
         let dic = messages[indexPath.row]
-        cell.textLabel?.text = dic.valueForKey("notification") as? String
+        cell.messageLabel.text = dic.valueForKey("notification") as? String
+        cell.contentMessageLabel.text = dic.valueForKey("notification") as? String
         if dic["isRead"] as? String == "yes" {
-            cell.textLabel?.font = UIFont.systemFontOfSize(14.0)
+            cell.yellowReadView.hidden = true
         } else {
-            cell.textLabel?.font = UIFont.boldSystemFontOfSize(14.0)
+            cell.yellowReadView.hidden = false
         }
+        
         //configure right buttons
         cell.rightButtons = [MGSwipeButton(title: "Delete", backgroundColor: UIColor.redColor())
             ,MGSwipeButton(title: "Unread",backgroundColor: UIColor.lightGrayColor())]
@@ -221,7 +200,6 @@ class MessageViewController: UIViewController {
             }
         }
     }
-
 }
 
 // MARK: - MGSwipeTableCellDelegate
