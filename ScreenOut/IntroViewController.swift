@@ -14,7 +14,7 @@ class IntroViewController: UIViewController {
     @IBOutlet weak var registrationTextField: UITextField!
     @IBOutlet weak var enterTextField: UIButton!
     
-    internal let MAX_REGISTRATION_CODE = 7
+    internal let MAX_REGISTRATION_CODE = 8
     
     // MARK: View life circle
     
@@ -122,7 +122,7 @@ class IntroViewController: UIViewController {
             })
         }
         else {
-            showErrorAlertView("Enter the 7-digit registration code", viewcontroller: self)
+            showErrorAlertView("Enter the 8-digit registration code", viewcontroller: self)
         }
         
     }
