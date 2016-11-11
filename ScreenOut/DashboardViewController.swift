@@ -57,16 +57,6 @@ class DashboardViewController: UIViewController {
         notificationView.addGestureRecognizer(tap)
 
         
-        
-        // force update device token to database
-        if let deviceTokenString = NSUserDefaults.standardUserDefaults().objectForKey(UserDefaultKey.kDeviceToken) as? String{
-            APIClient.sharedInstance.pushNotificationKey(deviceTokenString, callbackSucceed: { (dic:NSDictionary) in
-                
-            }) { (error:String) in
-                
-            }
-        }
-        
         // menu
         self.revealViewController().rearViewRevealWidth = self.view.frame.width - 50
         self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
@@ -90,6 +80,16 @@ class DashboardViewController: UIViewController {
         
         // getUnreadMessage
         getUnreadMessage()
+        
+        // force update device token to database
+        
+        if let deviceTokenString = UserDefaultKey.deviceToken {
+            APIClient.sharedInstance.pushNotificationKey(deviceTokenString, callbackSucceed: { (dic:NSDictionary) in
+                
+            }) { (error:String) in
+                
+            }
+        }
     }
     
     override func viewDidDisappear(animated: Bool) {

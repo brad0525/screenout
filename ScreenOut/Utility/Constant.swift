@@ -74,6 +74,16 @@ struct UserDefaultKey {
             userDefault.synchronize()
         }
     }
+    
+    static var deviceToken : String? {
+        get {
+            return userDefault.objectForKey(kDeviceToken) as? String
+        }
+        set {
+            userDefault.setObject(newValue, forKey: kDeviceToken)
+            userDefault.synchronize()
+        }
+    }
 }
 
 

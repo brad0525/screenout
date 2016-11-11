@@ -39,8 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let deviceTokenString: String = (deviceToken.description as NSString).stringByTrimmingCharactersInSet(characterSet).stringByReplacingOccurrencesOfString( " ", withString: "") as String
         
         // save device token
-        NSUserDefaults.standardUserDefaults().setObject(deviceTokenString, forKey: UserDefaultKey.kDeviceToken)
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaultKey.deviceToken = deviceTokenString
         
         if UserDefaultKey.apikey != nil {
             APIClient.sharedInstance.pushNotificationKey(deviceTokenString, callbackSucceed: { (dic:NSDictionary) in
