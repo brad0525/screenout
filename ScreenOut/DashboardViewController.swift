@@ -32,6 +32,8 @@ class DashboardViewController: UIViewController {
     private var speed = Speed()
     private let timerInterval: NSTimeInterval = 2.0
     private let notificationDelay: NSTimeInterval = 5.0
+    private var currentMaxSpeed : Double = 0
+    private var startTrackingMaxSpeed : Bool = false
     
     // MARK: View life circle
     
@@ -236,6 +238,15 @@ class DashboardViewController: UIViewController {
         
         if let speed = UserLocation.sharedInstance.currentSpeed {
             self.speed.current = speed
+            if startTrackingMaxSpeed == true {
+                if self.speed.mph > currentMaxSpeed {
+                    currentMaxSpeed = self.speed.mph
+                }
+            }
+            else {
+                currentMaxSpeed = 0
+            }
+            
             speedLabel.text = "\(round(self.speed.mph))"
         }
 
@@ -251,12 +262,14 @@ class DashboardViewController: UIViewController {
     // MARK: Tracking Action
     
     func trackPush() {
+        
         let deviceName = Device().name
         let deviceID = Device().uuid
         let deviceType = UIDevice.currentDevice().modelName
         let action = "Speed Change"
         let speed = "\(self.speed.mph)"
-        let maxSpeed = "\(self.speed.max)"
+        startTrackingMaxSpeed = false
+        let maxSpeed = "\(self.currentMaxSpeed)"
         var longitude = ""
         var latitude = ""
         if let tempLongitude = UserLocation.sharedInstance.currentLocation2d?.longitude {
@@ -266,15 +279,15 @@ class DashboardViewController: UIViewController {
             latitude = "\(tempLatitude)"
         }
         let isLocked = "\(Device().inactive)"
-        let disconnectedStatus = "true"
+        let disconnectedStatus = "false"
         let maxSpeedChangeCount = "3"
-        
 
 
         APIClient.sharedInstance.push(deviceName, deviceID: deviceID, deviceType: deviceType, action: action, speed: speed, maxSpeed: maxSpeed, latitude: latitude, longitude: longitude, islocked: isLocked, disconnectedStatus: disconnectedStatus, maxSpeedChangeCount: maxSpeedChangeCount, callbackSucceed: { (dic:NSDictionary) in
             
-            if let delay = dic["delay"] as? Double {
-                self.performSelector(#selector(self.trackPush), withObject: nil, afterDelay: delay)
+            if let delay = dic["delay"] as? String {
+                self.startTrackingMaxSpeed = true
+                self.performSelector(#selector(self.trackPush), withObject: nil, afterDelay: Double(delay)!)
             }
             
         }) { (error:NSDictionary) in

@@ -11,7 +11,7 @@ import UIKit
 class APIClient {
     static let sharedInstance = APIClient()
     
-    private var baseURL = "https://api.managesync.com/screenout/"
+    private var baseURL = "https://api.webtestlabs.com/screenout/"
     private var verifyUserCodeAPI = "verify-user-code/"
     private var pushAPI = "push/"
     private var pushNotificationKeyAPI = "push-notification-key/"
