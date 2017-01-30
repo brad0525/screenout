@@ -40,18 +40,18 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchUserMaxSpeedWithCompletionHandler({(success: Bool) -> Void in
-            if (success) {
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.maxSpeedLabel.text = "Speed (\(self.speed.max))"
-                })
-            } else {
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    let alert = UIAlertView(title: "User threshold failed", message: "The default value (\(self.speed.max)) will be used instead", delegate: nil, cancelButtonTitle: "OK")
-                    alert.show()
-                })
-            }
-        })
+//        fetchUserMaxSpeedWithCompletionHandler({(success: Bool) -> Void in
+//            if (success) {
+//                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//                    self.maxSpeedLabel.text = "Speed (\(self.speed.max))"
+//                })
+//            } else {
+//                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//                    let alert = UIAlertView(title: "User threshold failed", message: "The default value (\(self.speed.max)) will be used instead", delegate: nil, cancelButtonTitle: "OK")
+//                    alert.show()
+//                })
+//            }
+//        })
         
         // load applicationIconBadgeNumber when first load view.
         let tap = UITapGestureRecognizer(target: self, action: #selector(toggleMenuButton))
@@ -288,6 +288,11 @@ class DashboardViewController: UIViewController {
             if let delay = dic["delay"] as? String {
                 self.startTrackingMaxSpeed = true
                 self.performSelector(#selector(self.trackPush), withObject: nil, afterDelay: Double(delay)!)
+                
+                if let tempMaxSpeed = dic["maxSpeed"] as? String {
+                    self.maxSpeedLabel.text = "Speed (\(tempMaxSpeed))"
+                    
+                }
             }
             
         }) { (error:NSDictionary) in
