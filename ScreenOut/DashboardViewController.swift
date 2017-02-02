@@ -33,6 +33,7 @@ class DashboardViewController: UIViewController {
     private let timerInterval: NSTimeInterval = 2.0
     private let notificationDelay: NSTimeInterval = 5.0
     private var currentMaxSpeed : Double = 0
+    private var maxSpeedSendToServer : Double = 0
     private var startTrackingMaxSpeed : Bool = false
     
     // MARK: View life circle
@@ -269,7 +270,7 @@ class DashboardViewController: UIViewController {
         let action = "Speed Change"
         let speed = "\(self.speed.mph)"
         startTrackingMaxSpeed = false
-        let maxSpeed = "\(self.currentMaxSpeed)"
+        let maxSpeed = "\(self.maxSpeedSendToServer)"
         var longitude = ""
         var latitude = ""
         if let tempLongitude = UserLocation.sharedInstance.currentLocation2d?.longitude {
@@ -289,10 +290,16 @@ class DashboardViewController: UIViewController {
                 self.startTrackingMaxSpeed = true
                 self.performSelector(#selector(self.trackPush), withObject: nil, afterDelay: Double(delay)!)
                 
-                if let tempMaxSpeed = dic["maxSpeed"] as? String {
-                    self.maxSpeedLabel.text = "Speed (\(tempMaxSpeed))"
-                    
+                if let tempThreshold = dic["Threshold"] as? String {
+                    self.maxSpeedLabel.text = "Speed (\(tempThreshold))"
+                    self.speed.max = Double(tempThreshold)!
                 }
+                
+                if let tempMaxSpeed = dic["maxSpeed"] as? String {
+                    self.maxSpeedSendToServer = Double(tempMaxSpeed)!
+                }
+                
+                
             }
             
         }) { (error:NSDictionary) in
